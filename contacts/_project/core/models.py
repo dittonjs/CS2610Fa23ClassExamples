@@ -6,4 +6,3 @@ class Contact(models.Model):
     name = models.TextField()
     email = models.TextField()
     phone = models.TextField()
-

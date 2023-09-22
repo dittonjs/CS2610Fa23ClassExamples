@@ -7,5 +7,14 @@
 </head>
 <body>
   <a href="/new_contact/">New Contact</a>
+  <main>
+    {% for contact in contacts %}
+      <div>
+        <h3><a href="/contacts/{{contact.id}}/">{{contact.name}}</a></h3>
+        <div>{{contact.email}}</div>
+        <div>{{contact.phone}}</div>
+      </div>
+    {% endfor %}
+  </main>
 </body>
 </html>
