@@ -1,23 +1,17 @@
-import { useState } from 'react'
-
+import { useState } from 'react';
+import { Todo } from './Todo';
+import { InputForm } from './InputForm';
 
 export function App() {
   const [todos, setTodos] = useState([]);
-  const [currentTodo, setCurrentTodo] = useState("");
-  console.log(todos);
+  const [showCompleted, setShowCompleted] = useState(false)
 
-  function saveTodo() {
-    if (!currentTodo) {
-      // do something it indicate an error occurred
-    } else {
-      setCurrentTodo("")
+  function saveTodo(currentTodo) {
       const newTodo = {
-        id: "asdflkj1q23",
         content: currentTodo,
         checked: false,
       }
       setTodos([...todos, newTodo])
-    }
   }
 
   function toggleTodo(todo) {
@@ -29,26 +23,21 @@ export function App() {
     <div>
       <div>
         <input
-          value={currentTodo}
-          onChange={e => setCurrentTodo(e.target.value)}
-          type="text"
-        />
-        <button onClick={saveTodo}>Save</button>
+          type="checkbox"
+          checked={showCompleted}
+          onChange={() => setShowCompleted(!showCompleted)}
+        /> Show Completed
       </div>
+      <InputForm saveTodo={saveTodo}/>
       <div>
         {
           todos.length === 0 ? (
             <div>Type something and press save!</div>
           ) : (
             todos.map((todo, index) => {
-              return !todo.checked && (
-                  <div key={index}>
-                    <div>
-                      <input type="checkbox" checked={todo.checked} onChange={() => toggleTodo(todo)}/>
-                      {todo.content}
-                    </div>
-                  </div>
-                )
+              return (!todo.checked || showCompleted) && (
+                <Todo todo={todo} key={index} toggleTodo={toggleTodo} />
+              )
             })
           )
         }
