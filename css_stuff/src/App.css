@@ -1,0 +1,10 @@
+.c-input {
+  padding: 8px 16px;
+  border: 1px solid lightgray;
+  border-radius: 32px;
+  font: 18px;
+}
+
+.m-error {
+  border: 2px solid rgb(205, 35, 35);
+}
