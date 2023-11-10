@@ -1,10 +1,37 @@
-.c-input {
-  padding: 8px 16px;
-  border: 1px solid lightgray;
-  border-radius: 32px;
-  font: 18px;
+:root {
+  box-sizing: border-box;
 }
 
-.m-error {
-  border: 2px solid rgb(205, 35, 35);
+body {
+  margin: 0px;
+  height: 100vh;
+  overflow: hidden;
+}
+.letter {
+  display: flex;
+  flex: 1;
+  aspect-ratio: 1;
+  padding: 16px;
+  border: 1px solid rebeccapurple;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+  /* width: 60px;
+  height: 60px; */
+}
+
+.row {
+  padding: 8px;
+  display: flex;
+  justify-content: space-around;
+
+  align-items: center;
+  flex-wrap: wrap;
+  /* flex-direction: column; */
+  gap: 8px;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
 }

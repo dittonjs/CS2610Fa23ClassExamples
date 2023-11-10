@@ -4,6 +4,8 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { Input } from './Input';
 
+const letters = "asdfjkl;".split("")
+
 function App() {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false)
@@ -15,25 +17,17 @@ function App() {
     setPasswordError(true);
   }
 
+
+
   return (
     <>
-      <div>
-        <Input
-          type="email"
-          value={email}
-          hasError={emailError}
-          onChange={e => setEmail(e.target.value)}
-        />
+      <div className="row">
+        {
+          letters.map(letter => (
+            <div className="letter">{letter}</div>
+          ))
+        }
       </div>
-      <div>
-        <Input
-          type="password"
-          value={password}
-          hasError={passwordError}
-          onChange={e => setPassword(e.target.value)}
-        />
-      </div>
-      <button onClick={submit}>Login</button>
     </>
   )
 }
