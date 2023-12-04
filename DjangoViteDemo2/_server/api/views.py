@@ -21,8 +21,16 @@ def create_note(req):
 
 @login_required
 def get_notes(req):
-    notes = to_dicts(req.user.note_set.all()) # TODO what if there are a million of these
-    return JsonResponse({ "notes": notes })
+    if req.GET.get("page", "null") == "null":
+        notes = Note.objects.all()[:50]
+    else:
+        startOffset = (int(req.GET.get("page")) - 1) * 50
+        notes = Note.objects.all()[startOffset:startOffset+50]
+
+    # TODO GET THE PAGE FROM THE CLIENT
+    num_pages = int(Note.objects.count() / 50) + 1
+    notes = to_dicts(notes)
+    return JsonResponse({ "notes": notes, "num_pages": num_pages })
 
 
 

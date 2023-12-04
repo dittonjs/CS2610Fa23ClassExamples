@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { makeRequest } from "../utils/make_request";
 
 export function Home() {
+  const [searchParams] = useSearchParams()
   const [notes, setNotes] = useState([]);
-
+  const [numPages, setNumPages] = useState(1);
   async function getNotes() {
-    const results = await makeRequest("/api/notes/")
-    setNotes(results.notes)
+    const results = await makeRequest(`/api/notes/?page=${searchParams.get('page')}`)
+    setNotes(results.notes);
+    setNumPages(results.num_pages);
     console.log(results);
   }
 
   useEffect(() => {
     getNotes()
-  }, [])
+  }, [searchParams.get("page")])
 
   return (
     <div>
@@ -27,6 +29,15 @@ export function Home() {
             </div>
           ))
         }
+        <div className="pages">
+          {
+            Array.from({length: numPages}, (x, i) => {
+              return (
+                <Link to={`/?page=${i+1}`}>{i+1}</Link>
+              )
+            })
+          }
+        </div>
       </div>
     </div>
   )
